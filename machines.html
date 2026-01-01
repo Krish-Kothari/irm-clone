@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Machinery | IRM Enterprises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/download.png">
+    <style>
+        .machines-hero {
+            background: linear-gradient(rgba(26, 95, 122, 0.9), rgba(26, 95, 122, 0.9)), url('../images/machines-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 80px;
+            margin-top: 90px;
+            color: white;
+            text-align: center;
+        }
+        
+        .machines-hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .machines-hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .machines-section {
+            padding: 100px 0;
+        }
+        
+        .machine-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .filter-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .machines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .machine-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .machine-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .machine-card.featured::before {
+            content: 'Featured';
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .machine-img {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .machine-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .machine-card:hover .machine-img img {
+            transform: scale(1.05);
+        }
+        
+        .machine-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 95, 122, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .machine-card:hover .machine-overlay {
+            opacity: 1;
+        }
+        
+        .view-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .view-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .machine-info {
+            padding: 30px;
+        }
+        
+        .machine-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .machine-specs {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .machine-specs li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .machine-specs li:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            color: var(--gray);
+        }
+        
+        .spec-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .machine-capabilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .capability-tag {
+            background: var(--light-gray);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+        
+        .machine-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .specs-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        .specs-table {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .specs-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specs-table th {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .specs-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .specs-table tr:hover {
+            background: rgba(26, 95, 122, 0.05);
+        }
+        
+        .tech-support {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .tech-support-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tech-support h2 {
+            margin-bottom: 20px;
+        }
+        
+        .tech-support p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .support-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .support-feature {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .support-feature i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 5px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+        
+        .lightbox-nav button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .lightbox-nav button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .machine-detail {
+            display: none;
+        }
+        
+        .machine-detail.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .machines-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .machine-actions {
+                flex-direction: column;
+            }
+            
+            .specs-table {
+                overflow-x: auto;
+            }
+            
+            .specs-table table {
+                min-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo-container">
+                    <img src="images/download.png" alt="IRM Enterprises Logo" class="logo">
+                    <span class="logo-text">IRM Enterprises</span>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="machines.html" class="nav-link active"><i class="fas fa-industry"></i> Machines</a></li>
+                    <li><a href="products.html" class="nav-link"><i class="fas fa-cogs"></i> Products</a></li>
+                    <li><a href="clients.html" class="nav-link"><i class="fas fa-handshake"></i> Clients</a></li>
+                    <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+                
+                <div class="nav-cta">
+                    <a href="tel:+919876543210" class="btn btn-outline"><i class="fas fa-phone"></i> Call Now</a>
+                </div>
+                
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="machines-hero">
+        <div class="container">
+            <h1>Our Machinery Collection</h1>
+            <p>State-of-the-art precision machining equipment to deliver exceptional quality and accuracy for all your engineering needs.</p>
+            <div class="hero-buttons">
+                <a href="#machines" class="btn btn-primary"><i class="fas fa-eye"></i> View Machines</a>
+                <a href="contact.html" class="btn btn-secondary"><i class="fas fa-file-alt"></i> Request Machine Specs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Machines Section -->
+    <section class="machines-section" id="machines">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Advanced Technology</span>
+                <h2 class="section-title">Our Precision Machinery</h2>
+                <p class="section-description">Explore our advanced machinery portfolio designed for high precision and efficiency.</p>
+            </div>
+            
+            <!-- Machine Filter -->
+            <div class="machine-filter">
+                <button class="filter-btn active" data-filter="all">All Machines</button>
+                <button class="filter-btn" data-filter="cnc">CNC Machines</button>
+                <button class="filter-btn" data-filter="vmc">VMC Machines</button>
+                <button class="filter-btn" data-filter="lathe">Lathe Machines</button>
+                <button class="filter-btn" data-filter="milling">Milling Machines</button>
+                <button class="filter-btn" data-filter="grinding">Grinding Machines</button>
+            </div>
+            
+            <!-- Machines Grid -->
+            <div class="machines-grid" id="machinesContainer">
+                <!-- CNC Machine 1 -->
+                <div class="machine-card" data-category="cnc" data-id="cnc-1">
+                    <div class="machine-img">
+                        <img src="images/cnc-machine-1.jpg" alt="CNC Turning Center" data-full="images/cnc-machine-1-full.jpg">
+                        <div class="machine-overlay">
+                            <button class="view-btn view-image-btn">
+                                <i class="fas fa-expand"></i> View Image
+                            </button>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h3>CNC Turning Center</h3>
+                        <ul class="machine-specs">
+                            <li><span class="spec-label">Max Turning Diameter:</span> <span class="spec-value">Ø250 mm</span></li>
+                            <li><span class="spec-label">Max Turning Length:</span> <span class="spec-value">500 mm</span></li>
+                            <li><span class="spec-label">Spindle Speed:</span> <span class="spec-value">6000 RPM</span></li>
+                            <li><span class="spec-label">Accuracy:</span> <span class="spec-value">±0.001 mm</span></li>
+                        </ul>
+                        <div class="machine-capabilities">
+                            <span class="capability-tag">High Precision</span>
+                            <span class="capability-tag">Mass Production</span>
+                            <span class="capability-tag">Complex Shapes</span>
+                        </div>
+                        <div class="machine-actions">
+                            <button class="btn btn-primary view-details-btn" data-target="cnc-1-details">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VMC Machine -->
+                <div class="machine-card featured" data-category="vmc" data-id="vmc-1">
+                    <div class="machine-img">
+                        <img src="images/vmc-machine.jpg" alt="Vertical Machining Center" data-full="images/vmc-machine-full.jpg">
+                        <div class="machine-overlay">
+                            <button class="view-btn view-image-btn">
+                                <i class="fas fa-expand"></i> View Image
+                            </button>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h3>Vertical Machining Center</h3>
+                        <ul class="machine-specs">
+                            <li><span class="spec-label">Table Size:</span> <span class="spec-value">800 × 500 mm</span></li>
+                            <li><span class="spec-label">Travel (X/Y/Z):</span> <span class="spec-value">650/500/500 mm</span></li>
+                            <li><span class="spec-label">Spindle Speed:</span> <span class="spec-value">12000 RPM</span></li>
+                            <li><span class="spec-label">Tool Capacity:</span> <span class="spec-value">24 Tools</span></li>
+                        </ul>
+                        <div class="machine-capabilities">
+                            <span class="capability-tag">3D Machining</span>
+                            <span class="capability-tag">High Speed</span>
+                            <span class="capability-tag">Multi-axis</span>
+                        </div>
+                        <div class="machine-actions">
+                            <button class="btn btn-primary view-details-btn" data-target="vmc-1-details">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lathe Machine -->
+                <div class="machine-card" data-category="lathe" data-id="lathe-1">
+                    <div class="machine-img">
+                        <img src="images/lathe-machine.jpg" alt="Heavy Duty Lathe" data-full="images/lathe-machine-full.jpg">
+                        <div class="machine-overlay">
+                            <button class="view-btn view-image-btn">
+                                <i class="fas fa-expand"></i> View Image
+                            </button>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h3>Heavy Duty Lathe Machine</h3>
+                        <ul class="machine-specs">
+                            <li><span class="spec-label">Swing Over Bed:</span> <span class="spec-value">Ø500 mm</span></li>
+                            <li><span class="spec-label">Distance Between Centers:</span> <span class="spec-value">1500 mm</span></li>
+                            <li><span class="spec-label">Spindle Speed:</span> <span class="spec-value">2000 RPM</span></li>
+                            <li><span class="spec-label">Motor Power:</span> <span class="spec-value">7.5 HP</span></li>
+                        </ul>
+                        <div class="machine-capabilities">
+                            <span class="capability-tag">Heavy Duty</span>
+                            <span class="capability-tag">Precision Turning</span>
+                            <span class="capability-tag">Robust Construction</span>
+                        </div>
+                        <div class="machine-actions">
+                            <button class="btn btn-primary view-details-btn" data-target="lathe-1-details">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CNC Machine 2 -->
+                <div class="machine-card" data-category="cnc" data-id="cnc-2">
+                    <div class="machine-img">
+                        <img src="images/cnc-machine-2.jpg" alt="Multi-axis CNC" data-full="images/cnc-machine-2-full.jpg">
+                        <div class="machine-overlay">
+                            <button class="view-btn view-image-btn">
+                                <i class="fas fa-expand"></i> View Image
+                            </button>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h3>5-Axis CNC Machine</h3>
+                        <ul class="machine-specs">
+                            <li><span class="spec-label">Working Area:</span> <span class="spec-value">1000 × 600 × 500 mm</span></li>
+                            <li><span class="spec-label">Axes:</span> <span class="spec-value">5-axis Simultaneous</span></li>
+                            <li><span class="spec-label">Spindle Speed:</span> <span class="spec-value">18000 RPM</span></li>
+                            <li><span class="spec-label">Accuracy:</span> <span class="spec-value">±0.002 mm</span></li>
+                        </ul>
+                        <div class="machine-capabilities">
+                            <span class="capability-tag">5-Axis</span>
+                            <span class="capability-tag">Complex Geometry</span>
+                            <span class="capability-tag">High Precision</span>
+                        </div>
+                        <div class="machine-actions">
+                            <button class="btn btn-primary view-details-btn" data-target="cnc-2-details">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Milling Machine -->
+                <div class="machine-card" data-category="milling" data-id="milling-1">
+                    <div class="machine-img">
+                        <img src="images/milling-machine.jpg" alt="Precision Milling Machine" data-full="images/milling-machine-full.jpg">
+                        <div class="machine-overlay">
+                            <button class="view-btn view-image-btn">
+                                <i class="fas fa-expand"></i> View Image
+                            </button>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h3>Precision Milling Machine</h3>
+                        <ul class="machine-specs">
+                            <li><span class="spec-label">Table Size:</span> <span class="spec-value">1100 × 250 mm</span></li>
+                            <li><span class="spec-label">Longitudinal Travel:</span> <span class="spec-value">700 mm</span></li>
+                            <li><span class="spec-label">Spindle Taper:</span> <span class="spec-value">ISO 40</span></li>
+                            <li><span class="spec-label">Spindle Speed:</span> <span class="spec-value">4200 RPM</span></li>
+                        </ul>
+                        <div class="machine-capabilities">
+                            <span class="capability-tag">Face Milling</span>
+                            <span class="capability-tag">Slot Cutting</span>
+                            <span class="capability-tag">Drilling</span>
+                        </div>
+                        <div class="machine-actions">
+                            <button class="btn btn-primary view-details-btn" data-target="milling-1-details">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grinding Machine -->
+                <div class="machine-card" data-category="grinding" data-id="grinding-1">
+                    <div class="machine-img">
+                        <img src="images/grinding-machine.jpg" alt="Surface Grinding Machine" data-full="images/grinding-machine-full.jpg">
+                        <div class="machine-overlay">
+                            <button class="view-btn view-image-btn">
+                                <i class="fas fa-expand"></i> View Image
+                            </button>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h3>Surface Grinding Machine</h3>
+                        <ul class="machine-specs">
+                            <li><span class="spec-label">Grinding Capacity:</span> <span class="spec-value">300 × 600 mm</span></li>
+                            <li><span class="spec-label">Max Height:</span> <span class="spec-value">400 mm</span></li>
+                            <li><span class="spec-label">Wheel Size:</span> <span class="spec-value">Ø250 × 25 mm</span></li>
+                            <li><span class="spec-label">Accuracy:</span> <span class="spec-value">±0.001 mm</span></li>
+                        </ul>
+                        <div class="machine-capabilities">
+                            <span class="capability-tag">Surface Finish</span>
+                            <span class="capability-tag">Flatness</span>
+                            <span class="capability-tag">Parallelism</span>
+                        </div>
+                        <div class="machine-actions">
+                            <button class="btn btn-primary view-details-btn" data-target="grinding-1-details">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Specifications Section -->
+    <section class="specs-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Technical Details</span>
+                <h2 class="section-title">Detailed Specifications</h2>
+                <p class="section-description">Complete technical specifications of our machinery for your reference.</p>
+            </div>
+            
+            <!-- CNC Machine Details -->
+            <div class="machine-detail active" id="cnc-1-details">
+                <div class="specs-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">CNC Turning Center - Model TMC-250</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Max Turning Diameter</td>
+                                <td>Ø250 mm</td>
+                            </tr>
+                            <tr>
+                                <td>Max Turning Length</td>
+                                <td>500 mm</td>
+                            </tr>
+                            <tr>
+                                <td>Spindle Speed</td>
+                                <td>50 - 6000 RPM</td>
+                            </tr>
+                            <tr>
+                                <td>Spindle Motor Power</td>
+                                <td>7.5 kW</td>
+                            </tr>
+                            <tr>
+                                <td>Rapid Traverse (X/Z)</td>
+                                <td>20/24 m/min</td>
+                            </tr>
+                            <tr>
+                                <td>Positioning Accuracy</td>
+                                <td>±0.001 mm</td>
+                            </tr>
+                            <tr>
+                                <td>Repeatability</td>
+                                <td>±0.0005 mm</td>
+                            </tr>
+                            <tr>
+                                <td>Control System</td>
+                                <td>FANUC 0i-TF</td>
+                            </tr>
+                            <tr>
+                                <td>Tool Capacity</td>
+                                <td>12 Station Turret</td>
+                            </tr>
+                            <tr>
+                                <td>Machine Weight</td>
+                                <td>4500 kg</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- VMC Machine Details -->
+            <div class="machine-detail" id="vmc-1-details">
+                <div class="specs-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">Vertical Machining Center - Model VMC-850</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Table Size</td>
+                                <td>800 × 500 mm</td>
+                            </tr>
+                            <tr>
+                                <td>Travel (X/Y/Z)</td>
+                                <td>650/500/500 mm</td>
+                            </tr>
+                            <tr>
+                                <td>Spindle Speed</td>
+                                <td>100 - 12000 RPM</td>
+                            </tr>
+                            <tr>
+                                <td>Spindle Motor Power</td>
+                                <td>7.5 kW</td>
+                            </tr>
+                            <tr>
+                                <td>Rapid Traverse</td>
+                                <td>30 m/min</td>
+                            </tr>
+                            <tr>
+                                <td>Positioning Accuracy</td>
+                                <td>±0.002 mm</td>
+                            </tr>
+                            <tr>
+                                <td>Control System</td>
+                                <td>FANUC 0i-MF</td>
+                            </tr>
+                            <tr>
+                                <td>Tool Capacity</td>
+                                <td>24 Tools ATC</td>
+                            </tr>
+                            <tr>
+                                <td>Max Workpiece Weight</td>
+                                <td>800 kg</td>
+                            </tr>
+                            <tr>
+                                <td>Coolant System</td>
+                                <td>High Pressure (Optional)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Other machine details would follow similar structure -->
+        </div>
+    </section>
+
+    <!-- Technical Support Section -->
+    <section class="tech-support">
+        <div class="container">
+            <div class="tech-support-content">
+                <h2>Technical Support & Maintenance</h2>
+                <p>Our machines come with comprehensive technical support, training, and maintenance services to ensure optimal performance throughout their lifecycle.</p>
+                <a href="contact.html" class="btn btn-primary">
+                    <i class="fas fa-headset"></i> Request Technical Support
+                </a>
+                
+                <div class="support-features">
+                    <div class="support-feature">
+                        <i class="fas fa-tools"></i>
+                        <h3>Installation & Setup</h3>
+                        <p>Professional installation and commissioning by our expert engineers.</p>
+                    </div>
+                    <div class="support-feature">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Operator Training</h3>
+                        <p>Comprehensive training programs for your operators and technicians.</p>
+                    </div>
+                    <div class="support-feature">
+                        <i class="fas fa-history"></i>
+                        <h3>Preventive Maintenance</h3>
+                        <p>Scheduled maintenance plans to prevent downtime and extend machine life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo-container">
+                        <img src="images/download.png" alt="IRM Enterprises Logo" class="footer-logo">
+                        <span class="logo-text">IRM Enterprises</span>
+                    </div>
+                    <p class="footer-about">Leading precision engineering manufacturer with 25+ years of excellence in industrial and automotive components.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="machines.html"><i class="fas fa-chevron-right"></i> Machinery</a></li>
+                        <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Our Machines</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> CNC Machines</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> VMC Machines</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Lathe Machines</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Grinding Machines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat, India</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@irmenterprises.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 7:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 IRM Enterprises Pvt Ltd. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">&times;</button>
+            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-nav">
+                <button id="prevImage"><i class="fas fa-chevron-left"></i></button>
+                <button id="nextImage"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Machines Page Specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Machine Filter
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const machineCards = document.querySelectorAll('.machine-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide machine cards based on filter
+                    machineCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // View Details Button
+            const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+            const machineDetails = document.querySelectorAll('.machine-detail');
+            
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Hide all machine details
+                    machineDetails.forEach(detail => {
+                        detail.classList.remove('active');
+                    });
+                    
+                    // Show selected machine details
+                    const targetDetail = document.getElementById(targetId);
+                    if (targetDetail) {
+                        targetDetail.classList.add('active');
+                        
+                        // Scroll to specs section
+                        document.querySelector('.specs-section').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Lightbox Functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const viewImageButtons = document.querySelectorAll('.view-image-btn');
+            const prevImageBtn = document.getElementById('prevImage');
+            const nextImageBtn = document.getElementById('nextImage');
+            
+            let currentImageIndex = 0;
+            const images = Array.from(viewImageButtons).map(button => {
+                const img = button.closest('.machine-img').querySelector('img');
+                return {
+                    thumb: img.getAttribute('src'),
+                    full: img.getAttribute('data-full') || img.getAttribute('src')
+                };
+            });
+            
+            // Open lightbox
+            viewImageButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    currentImageIndex = index;
+                    const imgSrc = this.closest('.machine-img').querySelector('img').getAttribute('data-full') || 
+                                  this.closest('.machine-img').querySelector('img').getAttribute('src');
+                    lightboxImage.src = imgSrc;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close lightbox
+            lightboxClose.addEventListener('click', function() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Navigate lightbox images
+            prevImageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                lightboxImage.src = images[currentImageIndex].full;
+            });
+            
+            nextImageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                lightboxImage.src = images[currentImageIndex].full;
+            });
+            
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', function(e) {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        lightbox.classList.remove('active');
+                        document.body.style.overflow = '';
+                    } else if (e.key === 'ArrowLeft') {
+                        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                        lightboxImage.src = images[currentImageIndex].full;
+                    } else if (e.key === 'ArrowRight') {
+                        currentImageIndex = (currentImageIndex + 1) % images.length;
+                        lightboxImage.src = images[currentImageIndex].full;
+                    }
+                }
+            });
+            
+            // Initialize first machine details as active
+            if (machineDetails.length > 0) {
+                const firstMachineCard = document.querySelector('.machine-card');
+                if (firstMachineCard) {
+                    const firstMachineId = firstMachineCard.getAttribute('data-id') + '-details';
+                    const firstMachineDetail = document.getElementById(firstMachineId);
+                    if (firstMachineDetail) {
+                        machineDetails.forEach(detail => detail.classList.remove('active'));
+                        firstMachineDetail.classList.add('active');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

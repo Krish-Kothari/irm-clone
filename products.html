@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | IRM Enterprises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/download.png">
+    <style>
+        /* Additional CSS for Products Page */
+        .products-hero {
+            background: linear-gradient(rgba(26, 95, 122, 0.9), rgba(26, 95, 122, 0.9)), url('../images/products-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 80px;
+            margin-top: 90px;
+            color: white;
+            text-align: center;
+        }
+        
+        .products-hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .products-hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .products-section {
+            padding: 100px 0;
+        }
+        
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .category-btn {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .product-info {
+            padding: 30px;
+        }
+        
+        .product-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .product-specs {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .product-specs li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .product-specs li:last-child {
+            border-bottom: none;
+        }
+        
+        .product-specs i {
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .industries-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .industry-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .industry-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .industry-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .industry-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .material-section {
+            padding: 80px 0;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .material-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .material-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .material-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .material-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        .quality-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        .quality-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .quality-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .quality-feature {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .quality-feature i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        
+        .product-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        .modal-body {
+            padding: 40px;
+        }
+        
+        .modal-header {
+            margin-bottom: 30px;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .modal-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal-specs {
+            margin-bottom: 30px;
+        }
+        
+        .modal-specs h3,
+        .modal-applications h3 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .modal-specs table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .modal-specs td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .modal-specs tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            font-weight: 600;
+            color: var(--primary);
+            width: 40%;
+        }
+        
+        .applications-list {
+            list-style: none;
+        }
+        
+        .applications-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .applications-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .applications-list i {
+            color: var(--primary);
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .product-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .product-stat {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .product-stat i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .product-stat h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo-container">
+                    <img src="images/download.png" alt="IRM Enterprises Logo" class="logo">
+                    <span class="logo-text">IRM Enterprises</span>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="machines.html" class="nav-link"><i class="fas fa-industry"></i> Machines</a></li>
+                    <li><a href="products.html" class="nav-link active"><i class="fas fa-cogs"></i> Products</a></li>
+                    <li><a href="clients.html" class="nav-link"><i class="fas fa-handshake"></i> Clients</a></li>
+                    <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+                
+                <div class="nav-cta">
+                    <a href="tel:+919876543210" class="btn btn-outline"><i class="fas fa-phone"></i> Call Now</a>
+                </div>
+                
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Products Hero Section -->
+    <section class="products-hero">
+        <div class="container">
+            <h1>Precision Engineered Products</h1>
+            <p>High-quality precision components manufactured with advanced technology and rigorous quality control for superior performance and durability.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary"><i class="fas fa-eye"></i> View Products</a>
+                <a href="contact.html" class="btn btn-secondary"><i class="fas fa-file-download"></i> Download Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Portfolio</span>
+                <h2 class="section-title">Precision Products</h2>
+                <p class="section-description">Explore our range of high-precision engineered components for various industries.</p>
+            </div>
+            
+            <!-- Product Categories -->
+            <div class="product-categories">
+                <button class="category-btn active" data-category="all">
+                    <i class="fas fa-th"></i> All Products
+                </button>
+                <button class="category-btn" data-category="automotive">
+                    <i class="fas fa-car"></i> Automotive
+                </button>
+                <button class="category-btn" data-category="industrial">
+                    <i class="fas fa-industry"></i> Industrial
+                </button>
+                <button class="category-btn" data-category="aerospace">
+                    <i class="fas fa-plane"></i> Aerospace
+                </button>
+                <button class="category-btn" data-category="defense">
+                    <i class="fas fa-shield-alt"></i> Defense
+                </button>
+                <button class="category-btn" data-category="medical">
+                    <i class="fas fa-stethoscope"></i> Medical
+                </button>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsContainer">
+                <!-- Automotive Part 1 -->
+                <div class="product-card" data-category="automotive" data-id="auto-1">
+                    <div class="product-img">
+                        <img src="images/product-auto-1.jpg" alt="Precision Shaft">
+                        <div class="product-badge">Automotive</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Precision Transmission Shafts</h3>
+                        <p class="product-description">High-strength transmission shafts with precise tolerances for automotive applications.</p>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-ruler"></i> Tolerance: ±0.005 mm</li>
+                            <li><i class="fas fa-weight"></i> Material: EN8, EN24, Alloy Steel</li>
+                            <li><i class="fas fa-thermometer-half"></i> Heat Treatment: Induction Hardened</li>
+                            <li><i class="fas fa-check-circle"></i> Surface Finish: 0.4 Ra</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="btn btn-primary view-product-btn" data-target="auto-1">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Industrial Component -->
+                <div class="product-card" data-category="industrial" data-id="industrial-1">
+                    <div class="product-img">
+                        <img src="images/product-industrial-1.jpg" alt="Gear Component">
+                        <div class="product-badge">Industrial</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Precision Gear Components</h3>
+                        <p class="product-description">High-precision gears and gear assemblies for industrial machinery and equipment.</p>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-ruler"></i> Tolerance: ±0.01 mm</li>
+                            <li><i class="fas fa-weight"></i> Material: Cast Iron, Steel, Bronze</li>
+                            <li><i class="fas fa-cogs"></i> Gear Types: Spur, Helical, Bevel</li>
+                            <li><i class="fas fa-check-circle"></i> Quality: AGMA Class 8-10</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="btn btn-primary view-product-btn" data-target="industrial-1">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aerospace Component -->
+                <div class="product-card featured" data-category="aerospace" data-id="aero-1">
+                    <div class="product-img">
+                        <img src="images/product-aero-1.jpg" alt="Aerospace Component">
+                        <div class="product-badge">Aerospace</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Aerospace Structural Components</h3>
+                        <p class="product-description">Lightweight, high-strength components for aerospace applications with stringent quality standards.</p>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-ruler"></i> Tolerance: ±0.0025 mm</li>
+                            <li><i class="fas fa-weight"></i> Material: Titanium, Aluminum Alloys</li>
+                            <li><i class="fas fa-certificate"></i> Certification: AS9100, NADCAP</li>
+                            <li><i class="fas fa-check-circle"></i> Testing: NDT, X-Ray</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="btn btn-primary view-product-btn" data-target="aero-1">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Automotive Part 2 -->
+                <div class="product-card" data-category="automotive" data-id="auto-2">
+                    <div class="product-img">
+                        <img src="images/product-auto-2.jpg" alt="Engine Component">
+                        <div class="product-badge">Automotive</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Engine & Powertrain Components</h3>
+                        <p class="product-description">Precision engine components including connecting rods, pistons, and crankshafts.</p>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-ruler"></i> Tolerance: ±0.008 mm</li>
+                            <li><i class="fas fa-weight"></i> Material: Forged Steel, Alloy Steel</li>
+                            <li><i class="fas fa-fire"></i> Heat Treatment: Carburizing, Nitriding</li>
+                            <li><i class="fas fa-check-circle"></i> Balancing: Dynamic & Static</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="btn btn-primary view-product-btn" data-target="auto-2">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Defense Component -->
+                <div class="product-card" data-category="defense" data-id="defense-1">
+                    <div class="product-img">
+                        <img src="images/product-defense-1.jpg" alt="Defense Component">
+                        <div class="product-badge">Defense</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Defense & Military Components</h3>
+                        <p class="product-description">High-reliability components for defense applications with strict security and quality protocols.</p>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-ruler"></i> Tolerance: ±0.005 mm</li>
+                            <li><i class="fas fa-weight"></i> Material: Ballistic Steel, Armor Plate</li>
+                            <li><i class="fas fa-shield-alt"></i> Certification: MIL-STD, Defense QA</li>
+                            <li><i class="fas fa-check-circle"></i> Traceability: Full Material Traceability</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="btn btn-primary view-product-btn" data-target="defense-1">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medical Component -->
+                <div class="product-card" data-category="medical" data-id="medical-1">
+                    <div class="product-img">
+                        <img src="images/product-medical-1.jpg" alt="Medical Component">
+                        <div class="product-badge">Medical</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Surgical & Medical Instruments</h3>
+                        <p class="product-description">Precision medical components and surgical instruments with biocompatible materials.</p>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-ruler"></i> Tolerance: ±0.001 mm</li>
+                            <li><i class="fas fa-weight"></i> Material: Stainless Steel 316L, Titanium</li>
+                            <li><i class="fas fa-certificate"></i> Certification: ISO 13485, FDA Compliant</li>
+                            <li><i class="fas fa-check-circle"></i> Sterilization: Gamma & ETO Compatible</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="btn btn-primary view-product-btn" data-target="medical-1">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-quote-right"></i> Get Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries We Serve -->
+    <section class="industries-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Applications</span>
+                <h2 class="section-title">Industries We Serve</h2>
+                <p class="section-description">Our precision components are trusted by leading companies across various industries.</p>
+            </div>
+            
+            <div class="industries-grid">
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Automotive</h3>
+                    <p>Transmission systems, engine components, suspension parts, and powertrain assemblies.</p>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Industrial Machinery</h3>
+                    <p>Gearboxes, pumps, compressors, conveyor systems, and heavy equipment components.</p>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Aerospace</h3>
+                    <p>Structural components, landing gear parts, engine components, and control system parts.</p>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Defense</h3>
+                    <p>Weapon systems, vehicle components, communication equipment, and tactical gear parts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials Section -->
+    <section class="material-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Materials</span>
+                <h2 class="section-title">Materials We Work With</h2>
+                <p class="section-description">We work with a wide range of materials to meet diverse application requirements.</p>
+            </div>
+            
+            <div class="materials-grid">
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-weight-hanging"></i>
+                    </div>
+                    <h4>Alloy Steel</h4>
+                    <p>EN8, EN19, EN24, EN36</p>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Stainless Steel</h4>
+                    <p>304, 316, 410, 420, 17-4PH</p>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h4>Aluminum Alloys</h4>
+                    <p>6061, 7075, 2024, 5052</p>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h4>Titanium</h4>
+                    <p>Grade 2, Grade 5, 6AL-4V</p>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h4>Brass & Bronze</h4>
+                    <p>C360, C464, C630, C932</p>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h4>Cast Iron</h4>
+                    <p>Gray Iron, Ductile Iron, Malleable Iron</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Assurance -->
+    <section class="quality-section">
+        <div class="container">
+            <div class="quality-content">
+                <div class="section-header">
+                    <span class="section-subtitle">Quality</span>
+                    <h2 class="section-title">Quality Assurance</h2>
+                    <p class="section-description">We maintain the highest quality standards through rigorous testing and inspection processes.</p>
+                </div>
+                
+                <div class="quality-features">
+                    <div class="quality-feature">
+                        <i class="fas fa-microscope"></i>
+                        <h3>Dimensional Inspection</h3>
+                        <p>Advanced CMM, optical comparators, and profilometers for precise measurement.</p>
+                    </div>
+                    
+                    <div class="quality-feature">
+                        <i class="fas fa-magnet"></i>
+                        <h3>NDT Testing</h3>
+                        <p>Ultrasonic, magnetic particle, dye penetrant, and eddy current testing.</p>
+                    </div>
+                    
+                    <div class="quality-feature">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Material Certification</h3>
+                        <p>Full material traceability with mill test certificates and chemical analysis reports.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Stats -->
+    <div class="product-stats">
+        <div class="product-stat">
+            <i class="fas fa-cogs"></i>
+            <h4>150+</h4>
+            <p>Product Variants</p>
+        </div>
+        <div class="product-stat">
+            <i class="fas fa-industry"></i>
+            <h4>25+</h4>
+            <p>Years Experience</p>
+        </div>
+        <div class="product-stat">
+            <i class="fas fa-check-circle"></i>
+            <h4>99.8%</h4>
+            <p>Quality Acceptance Rate</p>
+        </div>
+        <div class="product-stat">
+            <i class="fas fa-shipping-fast"></i>
+            <h4>5000+</h4>
+            <p>Monthly Production Capacity</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo-container">
+                        <img src="images/download.png" alt="IRM Enterprises Logo" class="footer-logo">
+                        <span class="logo-text">IRM Enterprises</span>
+                    </div>
+                    <p class="footer-about">Leading precision engineering manufacturer with 25+ years of excellence in industrial and automotive components.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="machines.html"><i class="fas fa-chevron-right"></i> Machinery</a></li>
+                        <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Our Products</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Automotive Parts</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Industrial Components</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Aerospace Components</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Medical Instruments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat, India</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@irmenterprises.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 7:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 IRM Enterprises Pvt Ltd. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Products Page Specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product Filter
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // Show/hide product cards based on category
+                    productCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Product Modal
+            const productModal = document.getElementById('productModal');
+            const modalBody = document.getElementById('modalBody');
+            const modalClose = document.getElementById('modalClose');
+            const viewProductButtons = document.querySelectorAll('.view-product-btn');
+            
+            // Product Data
+            const products = {
+                'auto-1': {
+                    title: 'Precision Transmission Shafts',
+                    category: 'Automotive',
+                    images: ['images/product-auto-1.jpg', 'images/product-auto-1b.jpg', 'images/product-auto-1c.jpg'],
+                    description: 'High-strength transmission shafts manufactured with precise tolerances for automotive applications. These components are critical for power transmission in vehicles and are designed for durability and performance under demanding conditions.',
+                    specs: [
+                        { label: 'Tolerance', value: '±0.005 mm' },
+                        { label: 'Materials', value: 'EN8, EN24, EN36, Alloy Steel' },
+                        { label: 'Surface Finish', value: '0.4 Ra (Ground)' },
+                        { label: 'Hardness', value: '45-50 HRC' },
+                        { label: 'Heat Treatment', value: 'Induction Hardened, Case Carburized' },
+                        { label: 'Length Range', value: '50mm - 1000mm' },
+                        { label: 'Diameter Range', value: '10mm - 150mm' },
+                        { label: 'Straightness', value: '0.01mm per 100mm' }
+                    ],
+                    applications: [
+                        'Automotive transmission systems',
+                        'Industrial gearboxes',
+                        'Agricultural machinery',
+                        'Construction equipment',
+                        'Marine propulsion systems'
+                    ]
+                },
+                'industrial-1': {
+                    title: 'Precision Gear Components',
+                    category: 'Industrial',
+                    images: ['images/product-industrial-1.jpg', 'images/product-industrial-1b.jpg'],
+                    description: 'High-precision gears and gear assemblies manufactured for industrial machinery and equipment. Our gears are known for their accuracy, durability, and smooth operation.',
+                    specs: [
+                        { label: 'Tolerance', value: '±0.01 mm' },
+                        { label: 'Materials', value: 'Cast Iron, Steel Alloys, Bronze' },
+                        { label: 'Gear Types', value: 'Spur, Helical, Bevel, Worm' },
+                        { label: 'Quality Class', value: 'AGMA Class 8-10, DIN 6-7' },
+                        { label: 'Module Range', value: '1 - 10' },
+                        { label: 'Surface Finish', value: '0.8 Ra (Ground)' },
+                        { label: 'Heat Treatment', value: 'Carburizing, Nitriding, Through Hardening' }
+                    ],
+                    applications: [
+                        'Industrial gearboxes',
+                        'Power transmission systems',
+                        'Machine tools',
+                        'Conveyor systems',
+                        'Pump and compressor drives'
+                    ]
+                },
+                'aero-1': {
+                    title: 'Aerospace Structural Components',
+                    category: 'Aerospace',
+                    images: ['images/product-aero-1.jpg', 'images/product-aero-1b.jpg'],
+                    description: 'Lightweight, high-strength components manufactured for aerospace applications with stringent quality standards and certifications.',
+                    specs: [
+                        { label: 'Tolerance', value: '±0.0025 mm' },
+                        { label: 'Materials', value: 'Titanium Alloys, Aluminum 7075, 2024' },
+                        { label: 'Certifications', value: 'AS9100, NADCAP' },
+                        { label: 'Surface Treatment', value: 'Anodizing, Alodine, Passivation' },
+                        { label: 'Testing', value: 'NDT, X-Ray, Ultrasonic' },
+                        { label: 'Traceability', value: 'Full Material and Process Traceability' }
+                    ],
+                    applications: [
+                        'Aircraft structural components',
+                        'Landing gear parts',
+                        'Engine components',
+                        'Control system parts',
+                        'Avionics enclosures'
+                    ]
+                }
+            };
+            
+            // Open product modal
+            viewProductButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-target');
+                    const product = products[productId] || products['auto-1'];
+                    
+                    // Build modal content
+                    let modalHTML = `
+                        <div class="modal-header">
+                            <span class="product-badge">${product.category}</span>
+                            <h2>${product.title}</h2>
+                            <p>${product.description}</p>
+                        </div>
+                        
+                        <div class="modal-gallery">
+                    `;
+                    
+                    // Add images
+                    product.images.forEach((img, index) => {
+                        modalHTML += `<img src="${img}" alt="${product.title} - View ${index + 1}" onclick="openImageModal('${img}')">`;
+                    });
+                    
+                    modalHTML += `
+                        </div>
+                        
+                        <div class="modal-specs">
+                            <h3>Specifications</h3>
+                            <table>
+                    `;
+                    
+                    // Add specifications
+                    product.specs.forEach(spec => {
+                        modalHTML += `
+                            <tr>
+                                <td class="spec-label">${spec.label}</td>
+                                <td>${spec.value}</td>
+                            </tr>
+                        `;
+                    });
+                    
+                    modalHTML += `
+                            </table>
+                        </div>
+                        
+                        <div class="modal-applications">
+                            <h3>Applications</h3>
+                            <ul class="applications-list">
+                    `;
+                    
+                    // Add applications
+                    product.applications.forEach(app => {
+                        modalHTML += `
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>${app}</span>
+                            </li>
+                        `;
+                    });
+                    
+                    modalHTML += `
+                            </ul>
+                        </div>
+                        
+                        <div class="modal-actions">
+                            <a href="contact.html" class="btn btn-primary">
+                                <i class="fas fa-quote-right"></i> Request Quote
+                            </a>
+                            <a href="contact.html" class="btn btn-outline">
+                                <i class="fas fa-file-download"></i> Download Datasheet
+                            </a>
+                        </div>
+                    `;
+                    
+                    // Insert content and show modal
+                    modalBody.innerHTML = modalHTML;
+                    productModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal
+            modalClose.addEventListener('click', function() {
+                productModal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            productModal.addEventListener('click', function(e) {
+                if (e.target === productModal) {
+                    productModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Keyboard navigation for modal
+            document.addEventListener('keydown', function(e) {
+                if (productModal.classList.contains('active') && e.key === 'Escape') {
+                    productModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Global function for image modal (simplified version)
+            window.openImageModal = function(imgSrc) {
+                // Create a simple image lightbox
+                const lightbox = document.createElement('div');
+                lightbox.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.9);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    cursor: pointer;
+                `;
+                
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.style.maxWidth = '90%';
+                img.style.maxHeight = '90%';
+                img.style.borderRadius = '5px';
+                
+                lightbox.appendChild(img);
+                document.body.appendChild(lightbox);
+                
+                lightbox.addEventListener('click', function() {
+                    document.body.removeChild(lightbox);
+                });
+            };
+        });
+    </script>
+</body>
+</html>
